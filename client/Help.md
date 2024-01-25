@@ -26,3 +26,5 @@ npm uninstall react-router-dom@5.2.0
 npm i react-router-dom@6.0.2
 
 yarn add axios
+
+npm i react-router
