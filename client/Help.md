@@ -28,3 +28,5 @@ npm i react-router-dom@6.0.2
 yarn add axios
 
 npm i react-router
+
+npm i timeago
