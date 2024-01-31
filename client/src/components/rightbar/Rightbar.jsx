@@ -1,5 +1,5 @@
 import "./rightbar.css";
-import { Users } from "../../dummyData";
+//import { Users } from "../../dummyData";
 import Online from "../online/Online";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -18,14 +18,17 @@ export default function Rightbar({ user }) {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
-        setFriends(friendList.data);
+        if (user?._id !== undefined && user?._id !== null) 
+        {
+          const friendList = await axios.get("/users/friends/" + user?._id);
+          setFriends(friendList.data);
+        }
       } catch (err) {
         console.log(err);
       }
     };
     getFriends();
-  }, [user]);
+  }, [user?._id]);
 
   const handleClick = async () => {
     try {
@@ -57,7 +60,7 @@ export default function Rightbar({ user }) {
         <img className="rightbarAd" src={PF +"ad.png"} alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          {Users.map((u) => (
+          {friends.map((u) => (
             <Online key={u.id} user={u} />
           ))}
         </ul>
