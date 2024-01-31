@@ -12,7 +12,7 @@ export default function Topbar() {
   const logoutCall = async (e) => {
     e.preventDefault();
     window.localStorage.clear();
-    navigate("/Login");
+    navigate("/login");
 }; 
 
 return (
@@ -34,10 +34,10 @@ return (
       <div className="topbarRight">
         <div className="topbarLinks">
         { !user && <Link to="/login" style={{ textDecoration: "none" }}>
-        <span className="topbarLink">Login</span>
+          <span className="topbarLink">Login</span>
         </Link>}
         { user && <Link to="/login" onClick={logoutCall} style={{ textDecoration: "none" }}>
-        <span className="topbarLink">Logout</span>
+          <span className="topbarLink">Logout</span>
         </Link>}
 
 
