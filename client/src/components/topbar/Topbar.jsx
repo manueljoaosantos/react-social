@@ -1,14 +1,21 @@
 import "./topbar.css"
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
-import { Link } from "react-router-dom"
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom"
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Topbar() {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  return (
+  const logoutCall = async (e) => {
+    e.preventDefault();
+    window.localStorage.clear();
+    navigate("/Login");
+}; 
+
+return (
 <div className="topbarContainer">
   <div className="topbarLeft">
         <Link to="/" style={{ textDecoration: "none" }}>
@@ -26,9 +33,14 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-        <Link to="/login" style={{ textDecoration: "none" }}>
+        { !user && <Link to="/login" style={{ textDecoration: "none" }}>
         <span className="topbarLink">Login</span>
-        </Link>
+        </Link>}
+        { user && <Link to="/login" onClick={logoutCall} style={{ textDecoration: "none" }}>
+        <span className="topbarLink">Logout</span>
+        </Link>}
+
+
 
           
           <span className="topbarLink">Timeline</span>
